@@ -14,7 +14,7 @@ export default function LoginForm() {
 	const supabase = createClientComponentClient();
 	const router = useRouter();
 
-	const handleSignIn = async () => {
+	const handleLogIn = async () => {
 		const { error, data } = await supabase.auth.signInWithPassword({
 			email: email,
 			password: password,
@@ -31,7 +31,7 @@ export default function LoginForm() {
 
 	return (
 		<div>
-			<h1>Sign In</h1>
+			<h1>Log In</h1>
 			<div>
 				<label htmlFor="email">Email</label>
 				<input
@@ -57,12 +57,12 @@ export default function LoginForm() {
 			<button
 				className="submitButton"
 				type="submit"
-				onClick={handleSignIn}
+				onClick={handleLogIn}
 			>
-				Sign In
+				Log In
 			</button>
 			<Link href="/register">
-				If you don&apos;t have an account, sign up here.
+				If you don&apos;t have an account, register here.
 			</Link>
 		</div>
 	);

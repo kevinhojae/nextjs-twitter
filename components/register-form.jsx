@@ -41,6 +41,7 @@ export default function RegisterForm() {
 			<div>
 				<label htmlFor="email">Email</label>
 				<input
+					className="account-input"
 					id="email"
 					type="text"
 					name="email"
@@ -50,6 +51,7 @@ export default function RegisterForm() {
 			<div>
 				<label htmlFor="password">Password</label>
 				<input
+					className="account-input"
 					id="password"
 					type="password"
 					name="password"
@@ -59,17 +61,22 @@ export default function RegisterForm() {
 			<div>
 				<label htmlFor="username">Username</label>
 				<input
+					className="account-input"
 					id="username"
 					type="text"
 					name="username"
 					onChange={(e) => setUsername(e.target.value)}
 				/>
 			</div>
-			<button type="submit" onClick={handleSignUp}>
+			<button
+				className="submitButton"
+				type="submit"
+				onClick={handleSignUp}
+			>
 				Register
 			</button>
 			<Link href="/login">
-				If you already have an account, sign in here.
+				If you already have an account, log in here.
 			</Link>
 		</div>
 	);
