@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import SaveButton from "./save-button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
@@ -11,14 +11,19 @@ export default function AddPostForm() {
 	const [isInputValid, setIsInputValid] = useState(false);
 	const supabase = createClientComponentClient();
 
+	const validateInput = useCallback(() => {
+		if (title === "" || content === "") {
+			setIsInputValid(false);
+		} else {
+			setIsInputValid(true);
+		}
+	}, [title, content]);
+
+	useEffect(() => {
+		validateInput();
+	}, [title, content, validateInput]);
+
 	const handleSaveClick = () => {
-		const validateInput = () => {
-			if (title === "" || content === "") {
-				setIsInputValid(false);
-			} else {
-				setIsInputValid(true);
-			}
-		};
 		const savePost = async () => {
 			setIsLoading(true);
 			const {
@@ -40,12 +45,13 @@ export default function AddPostForm() {
 				setIsLoading(false);
 			}
 		};
-		validateInput();
 		if (isInputValid) {
-			savePost();
+			savePost().then(() => {
+				console.log("Post saved");
+			});
 		} else {
-      console.log("Input is not valid");
-    }
+			console.log("Input is not valid");
+		}
 	};
 	return (
 		<div className="add-post">
@@ -75,9 +81,9 @@ export default function AddPostForm() {
 						"Loading..."
 					)}
 				</div>
-        <div className="invalid-input">
-          {isInputValid ? null : "Input is invalid"}
-        </div>
+				<div className="invalid-input">
+					{isInputValid ? null : "Input is invalid"}
+				</div>
 			</div>
 		</div>
 	);
