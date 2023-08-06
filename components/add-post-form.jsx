@@ -8,20 +8,8 @@ export default function AddPostForm() {
 	const [title, setTitle] = useState("");
 	const [content, setContent] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
-	const [isInputValid, setIsInputValid] = useState(false);
+	const [isInputValid, setIsInputValid] = useState(true);
 	const supabase = createClientComponentClient();
-
-	const validateInput = useCallback(() => {
-		if (title === "" || content === "") {
-			setIsInputValid(false);
-		} else {
-			setIsInputValid(true);
-		}
-	}, [title, content]);
-
-	useEffect(() => {
-		validateInput();
-	}, [title, content, validateInput]);
 
 	const handleSaveClick = () => {
 		const savePost = async () => {
@@ -37,6 +25,7 @@ export default function AddPostForm() {
 					author_id: user.id,
 				},
 			]);
+
 			if (error) {
 				console.log(error);
 			} else {
@@ -45,12 +34,16 @@ export default function AddPostForm() {
 				setIsLoading(false);
 			}
 		};
-		if (isInputValid) {
+
+		if (title === "" || content === "") {
+			setIsInputValid(false);
+			console.log("Input is not valid");
+		} else {
+			setIsInputValid(true);
 			savePost().then(() => {
 				console.log("Post saved");
 			});
-		} else {
-			console.log("Input is not valid");
+			console.log("Input is valid");
 		}
 	};
 	return (
