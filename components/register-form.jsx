@@ -16,21 +16,40 @@ export default function RegisterForm() {
 	const router = useRouter();
 
 	const handleSignUp = async () => {
+		let isUsernameValid = true;
+		const validateUsername = () => {
+			supabase
+				.from("profiles")
+				.select("username")
+				.then((data) => {
+					if (data === username) {
+						console.log("Username already exists");
+						isUsernameValid = false;
+					}
+				});
+		};
+
+		validateUsername();
+		if (!isUsernameValid) {
+			setIsRegisterError(true);
+			return;
+		} else {
+			console.log("Username is valid");
+		}
+
 		const { error, session, user } = await supabase.auth.signUp({
 			email: email,
 			password: password,
-			options: {
-				data: {
-					username: username,
-				},
-			},
 		});
 		if (error) {
 			console.log(error);
 			setIsRegisterError(true);
 		} else {
-			setIsRegisterError(false);
+			const { data, error } = await supabase
+				.from("profiles")
+				.insert([{ id: user.id, username: username }]);
 			console.log(session);
+			setIsRegisterError(false);
 			router.replace("/login");
 		}
 	};
@@ -78,6 +97,7 @@ export default function RegisterForm() {
 			<Link href="/login">
 				If you already have an account, log in here.
 			</Link>
+			<div>{isRegisterError ? "Username already exists" : ""}</div>
 		</div>
 	);
 }
