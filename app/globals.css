@@ -33,6 +33,14 @@ h1 {
   padding-bottom: 0.5rem;
 }
 
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.05em;
+  padding-bottom: 0.5rem;
+}
+
 .account-input {
   width: 100%;
   padding: 12px 20px;
@@ -71,7 +79,7 @@ h1 {
   left: 0;
   top: 0;
   padding-top: 40px;
-  background-color: #D3D3D3;
+  background-color: #F7F7F5;
   }
   
 .sidebar div {
@@ -84,4 +92,38 @@ display: block;
 margin-left: 200px;
 margin-top: 40px;
 font-size: 18px;
+}
+
+.post-card {
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+
+.add-post-button {
+  margin-left: 200px;
+  margin-top: 40px;
+  padding: 10px;
+  border-color: lightgray;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.add-post {
+  margin-left: 200px;
+  margin-top: 40px;
+  padding: 20px;
+  border-color: lightgray;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.save-button {
+  border-color: lightgray;
+  border-radius: 10px;
+}
+
+.invalid-input {
+  color: red;
 }

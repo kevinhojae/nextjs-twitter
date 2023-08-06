@@ -1,12 +1,12 @@
 import Link from "next/link";
 import SidebarUserInfo from "./sidebar-user-info";
 
-export function SidebarFilter() {
+export default function SidebarFilter() {
 	return (
-		<div class="sidebar">
+		<div className="sidebar">
 			<SidebarUserInfo />
 			<div>
-				<Link href="/home/all">all</Link>
+				<Link href="/home">all</Link>
 			</div>
 			<div>
 				<Link href="/home/me">me</Link>

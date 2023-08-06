@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import PostItem from "./post-item";
-import { set } from "internal-slot";
+import PostCard from "./post-card";
 
 export default function PostContainer({ session }) {
 	const [posts, setPosts] = useState([]);
@@ -23,7 +22,7 @@ export default function PostContainer({ session }) {
 	return (
 		<div>
 			{posts &&
-				posts.map((post) => <PostItem key={post.id} post={post} />)}
+				posts.map((post) => <PostCard key={post.id} post={post} />)}
 		</div>
 	);
 }
